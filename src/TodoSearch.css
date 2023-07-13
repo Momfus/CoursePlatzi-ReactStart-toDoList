@@ -1,0 +1,21 @@
+input {
+  height: 64px;
+  margin: auto;
+
+  font-size: 24px;
+  text-align: center;
+
+  background: #f9fbfc;
+  border-radius: 2px;
+  border: 2px solid #202329;
+
+  box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.25);
+}
+
+input::placeholder {
+  color: #a5a5a5;
+}
+
+input:focus {
+  outline-color: #61dafa;
+}

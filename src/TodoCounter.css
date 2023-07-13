@@ -1,0 +1,12 @@
+.mainCounter > h1 {
+  font-size: 24px;
+  font-weight: normal;
+  text-align: center;
+  margin: 0;
+  padding: 48px;
+  max-width: 327px;
+}
+
+.mainCounter > h1 > span {
+  font-weight: bold;
+}

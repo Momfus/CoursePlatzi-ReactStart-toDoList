@@ -6,8 +6,6 @@ import { TodoList } from "./TodoList";
 import { TodoItem } from "./TodoItem";
 import { CreateTodoButton } from "./CreateTodoButton";
 
-import "./App.css";
-
 const defaultTodos = [
   { text: "Cortar cebolla", completed: false },
   { text: "Tomar curso", completed: false },
@@ -20,6 +18,8 @@ function App() {
     <React.Fragment>
       <TodoCounter completed={16} total={25} />
       <TodoSearch />
+
+      <br />
 
       <TodoList>
         {defaultTodos.map((todo) => (
