@@ -14,10 +14,18 @@ const defaultTodos = [
 ];
 
 function App() {
+  const [todos, setTodos] = React.useState(defaultTodos);
+  const [searchValue, setSearchValue] = React.useState(""); // Nomeclatura: state, setState
+
+  const completedTodos = todos.filter((todo) => !!todo.completed).length; // todo.completed === true; el simbolo !! lo convierte en booleano en caso que haya string o un valor cualquiera
+  const totalTodos = todos.length;
+
+  console.log("Los usuarios buscan todos de " + searchValue);
+
   return (
     <React.Fragment>
-      <TodoCounter completed={16} total={25} />
-      <TodoSearch />
+      <TodoCounter completed={completedTodos} total={totalTodos} />
+      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
 
       <br />
 
