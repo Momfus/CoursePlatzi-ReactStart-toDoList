@@ -26,7 +26,20 @@ function App() {
     return todoText.includes(searchText);
   });
 
-  console.log("Los usuarios buscan todos de " + searchValue);
+  const completeTodo = (text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
+    const previousState = newTodos[todoIndex].completed;
+    newTodos[todoIndex].completed = !previousState;
+    setTodos(newTodos);
+  };
+
+  const deleteTodo = (text) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
+    newTodos.splice(todoIndex, 1); // Lo saca del arreglo
+    setTodos(newTodos);
+  };
 
   return (
     <React.Fragment>
@@ -41,6 +54,8 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onComplete={() => completeTodo(todo.text)} // Se envuelve la función en otra para ejecutarse solamente cuando se require (sino hace un etorno loop)
+            onDelete={() => deleteTodo(todo.text)}
           />
         ))}
       </TodoList>
