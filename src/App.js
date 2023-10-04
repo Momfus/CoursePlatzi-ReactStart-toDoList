@@ -7,18 +7,30 @@ import { TodoItem } from "./TodoItem";
 import { CreateTodoButton } from "./CreateTodoButton";
 //import {RxCheck} from 'react-icons/rx' // si uno quiere para iconos generales, usar npm install react-icons --save
 
-function App() {
-  const localStorageTodos = localStorage.getItem("TODOS_V1");
-  let parsedTodos;
+function useLocalStorage(itemName, initialValue) {
+  // Por convención, en react, los custom hooks se usa el prefijo "use"
+  const localStorageItem = localStorage.getItem(itemName);
+  let parsedItems;
 
-  if (!localStorageTodos) {
-    localStorage.setItem("TODOS_V1", JSON.stringify([]));
-    parsedTodos = [];
+  if (!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItems = initialValue;
   } else {
-    parsedTodos = JSON.parse(localStorageTodos);
+    parsedItems = JSON.parse(localStorageItem);
   }
 
-  const [todos, setTodos] = React.useState(parsedTodos);
+  const [item, setItem] = React.useState(parsedItems); // Estado interno del esta custom hook (se coloca aca porque puede tener un valor inicial vacio como el indicado anteriormente)
+
+  const saveItem = (newItem) => {
+    localStorage.setItem(itemName, JSON.stringify(newItem));
+    setItem(newItem);
+  };
+
+  return [item, saveItem]; // Asi se exporta para poder usarlo en otro lado (el estado y la función)
+}
+
+function App() {
+  const [todos, saveTodos] = useLocalStorage("TODOS_V1", []); // Lo que destructuramos (variables, estados y funciones) podemos colocar el nombre que queramos
   const [searchValue, setSearchValue] = React.useState(""); // Nomeclatura: state, setState
 
   const completedTodos = todos.filter((todo) => !!todo.completed).length; // todo.completed === true; el simbolo !! lo convierte en booleano en caso que haya string o un valor cualquiera
@@ -29,11 +41,6 @@ function App() {
     const searchText = searchValue.toLowerCase();
     return todoText.includes(searchText);
   });
-
-  const saveTodos = (newTodos) => {
-    localStorage.setItem("TODOS_V1", JSON.stringify(newTodos));
-    setTodos(newTodos);
-  };
 
   const completeTodo = (text) => {
     const newTodos = [...todos];
