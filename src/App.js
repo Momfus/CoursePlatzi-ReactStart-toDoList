@@ -7,15 +7,18 @@ import { TodoItem } from "./TodoItem";
 import { CreateTodoButton } from "./CreateTodoButton";
 //import {RxCheck} from 'react-icons/rx' // si uno quiere para iconos generales, usar npm install react-icons --save
 
-const defaultTodos = [
-  { text: "Cortar cebolla", completed: false },
-  { text: "Tomar curso", completed: false },
-  { text: "Limpiar cocina", completed: true },
-  { text: "Limpiar platos", completed: true },
-];
-
 function App() {
-  const [todos, setTodos] = React.useState(defaultTodos);
+  const localStorageTodos = localStorage.getItem("TODOS_V1");
+  let parsedTodos;
+
+  if (!localStorageTodos) {
+    localStorage.setItem("TODOS_V1", JSON.stringify([]));
+    parsedTodos = [];
+  } else {
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
+
+  const [todos, setTodos] = React.useState(parsedTodos);
   const [searchValue, setSearchValue] = React.useState(""); // Nomeclatura: state, setState
 
   const completedTodos = todos.filter((todo) => !!todo.completed).length; // todo.completed === true; el simbolo !! lo convierte en booleano en caso que haya string o un valor cualquiera
@@ -27,19 +30,24 @@ function App() {
     return todoText.includes(searchText);
   });
 
+  const saveTodos = (newTodos) => {
+    localStorage.setItem("TODOS_V1", JSON.stringify(newTodos));
+    setTodos(newTodos);
+  };
+
   const completeTodo = (text) => {
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex((todo) => todo.text === text);
     const previousState = newTodos[todoIndex].completed;
     newTodos[todoIndex].completed = !previousState;
-    setTodos(newTodos);
+    saveTodos(newTodos);
   };
 
   const deleteTodo = (text) => {
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex((todo) => todo.text === text);
     newTodos.splice(todoIndex, 1); // Lo saca del arreglo
-    setTodos(newTodos);
+    saveTodos(newTodos);
   };
 
   return (
