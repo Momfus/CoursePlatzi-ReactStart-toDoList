@@ -26,7 +26,7 @@ function useLocalStorage(itemName, initialValue) {
         setError(true);
       }
     }, 2000); // Prueba de segundos para simular el tiempo de conexión
-  });
+  }, []); // Lo dejo vacio porque así señalo que no hay dependencias que deba volvers a llamar por cada cambio de estado
 
   const saveItem = (newItem) => {
     localStorage.setItem(itemName, JSON.stringify(newItem));
