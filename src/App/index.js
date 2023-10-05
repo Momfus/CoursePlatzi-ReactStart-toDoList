@@ -6,7 +6,12 @@ import { AppUi } from "./AppUi";
 import { useLocalStorage } from "./userLocalStorage";
 
 function App() {
-  const [todos, saveTodos] = useLocalStorage("TODOS_V1", []); // Lo que destructuramos (variables, estados y funciones) podemos colocar el nombre que queramos
+  const {
+    item: todos,
+    saveItem: saveTodos,
+    loading,
+    error,
+  } = useLocalStorage("TODOS_V1", []); // Lo que destructuramos (variables, estados y funciones) podemos colocar el nombre que queramos
   const [searchValue, setSearchValue] = React.useState(""); // Nomeclatura: state, setState
 
   const completedTodos = todos.filter((todo) => !!todo.completed).length; // todo.completed === true; el simbolo !! lo convierte en booleano en caso que haya string o un valor cualquiera
@@ -36,6 +41,8 @@ function App() {
   return (
     // Se envia todo como props y así se separá la lógica de lo que se muestra en renderizado
     <AppUi
+      loading={loading}
+      error={error}
       completedTodos={completedTodos}
       searchValue={searchValue}
       totalTodos={totalTodos}
