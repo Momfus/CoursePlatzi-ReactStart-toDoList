@@ -13,6 +13,8 @@ function TodoProvider({ children }) {
   } = useLocalStorage("TODOS_V1", []); // Lo que destructuramos (variables, estados y funciones) podemos colocar el nombre que queramos
   const [searchValue, setSearchValue] = React.useState(""); // Nomeclatura: state, setState
 
+  const [openModal, setOpenModal] = React.useState(true);
+
   const completedTodos = todos.filter((todo) => !!todo.completed).length; // todo.completed === true; el simbolo !! lo convierte en booleano en caso que haya string o un valor cualquiera
   const totalTodos = todos.length;
 
@@ -43,12 +45,14 @@ function TodoProvider({ children }) {
         loading,
         error,
         completedTodos,
-        searchValue,
         totalTodos,
+        searchValue,
         setSearchValue,
         searchedTodos,
         completeTodo,
         deleteTodo,
+        openModal,
+        setOpenModal,
       }}
     >
       {children}

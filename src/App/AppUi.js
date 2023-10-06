@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import { TodoCounter } from "../TodoCounter";
 import { TodoSearch } from "../TodoSearch";
@@ -9,10 +9,11 @@ import { TodosError } from "../TodosError";
 import { EmptyTodos } from "../EmptyTodos";
 import { CreateTodoButton } from "../CreateTodoButton";
 import { TodoContext } from "../TodoContext";
+import { Modal } from "../Modal";
 
 function AppUi() {
   // Puede usarse lo de abajo de usar context que permite de forma mas prolija usar el TodoContext.consumer
-  const { loading, error, searchedTodos, completeTodo, deleteTodo } =
+  const { loading, error, searchedTodos, completeTodo, deleteTodo, openModal } =
     React.useContext(TodoContext);
 
   return (
@@ -41,8 +42,9 @@ function AppUi() {
           />
         ))}
       </TodoList>
-      )
+
       <CreateTodoButton />
+      {openModal && <Modal>La funcionalidad de agregar TODO</Modal>}
     </>
   );
 }
