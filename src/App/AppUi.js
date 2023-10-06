@@ -10,6 +10,7 @@ import { EmptyTodos } from "../EmptyTodos";
 import { CreateTodoButton } from "../CreateTodoButton";
 import { TodoContext } from "../TodoContext";
 import { Modal } from "../Modal";
+import { TodoForm } from "../TodoForm";
 
 function AppUi() {
   // Puede usarse lo de abajo de usar context que permite de forma mas prolija usar el TodoContext.consumer
@@ -44,7 +45,11 @@ function AppUi() {
       </TodoList>
 
       <CreateTodoButton />
-      {openModal && <Modal>La funcionalidad de agregar TODO</Modal>}
+      {openModal && (
+        <Modal>
+          <TodoForm></TodoForm>
+        </Modal>
+      )}
     </>
   );
 }
