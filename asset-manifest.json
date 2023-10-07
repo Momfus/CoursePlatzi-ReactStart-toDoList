@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/CoursePlatzi-ReactStart/static/css/main.02025eb1.css",
+    "main.js": "/CoursePlatzi-ReactStart/static/js/main.7790d229.js",
+    "index.html": "/CoursePlatzi-ReactStart/index.html",
+    "static/media/icon-delete.svg": "/CoursePlatzi-ReactStart/static/media/icon-delete.5b80b13b07b967a480d23b7b96dbefa2.svg",
+    "static/media/icon-check.svg": "/CoursePlatzi-ReactStart/static/media/icon-check.c2806e60a3201495929a88b1667e865f.svg",
+    "main.02025eb1.css.map": "/CoursePlatzi-ReactStart/static/css/main.02025eb1.css.map",
+    "main.7790d229.js.map": "/CoursePlatzi-ReactStart/static/js/main.7790d229.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.02025eb1.css",
+    "static/js/main.7790d229.js"
+  ]
+}
