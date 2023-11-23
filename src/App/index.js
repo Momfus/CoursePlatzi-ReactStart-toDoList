@@ -44,20 +44,16 @@ function App() {
       </TodoHeader>
 
       <br />
-      <TodoList>
-        {loading && (
-          <>
-            <TodosLoading />
-            <TodosLoading />
-            <TodosLoading />
-          </>
-        )}
-        {error && <TodosError />}
-        {!loading && searchedTodos.length === 0 && (
-          <EmptyTodos totalTodos={totalTodos} />
-        )}
 
-        {searchedTodos.map((todo) => (
+      {/* Se aplica el patrón "render props" que sirve para renderizar según lo que se va necesitando  */}
+      <TodoList
+        error={error}
+        loading={loading}
+        searchedTodos={searchedTodos}
+        onError={() => <TodosError />} // Esto es un render prop y similares
+        onLoading={() => <TodosLoading />}
+        onEmptyTodos={() => <EmptyTodos totalTodos={totalTodos} />}
+        render={(todo) => (
           <TodoItem
             key={todo.text}
             text={todo.text}
@@ -65,8 +61,8 @@ function App() {
             onComplete={() => completeTodo(todo.text)}
             onDelete={() => deleteTodo(todo.text)}
           />
-        ))}
-      </TodoList>
+        )}
+      />
 
       <CreateTodoButton setOpenModal={setOpenModal} openModal={openModal} />
       {openModal && (
