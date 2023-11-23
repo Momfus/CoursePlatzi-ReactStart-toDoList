@@ -1,11 +1,8 @@
 import React from "react";
 import "./TodoCounter.css";
-import { TodoContext } from "../TodoContext";
 
-function TodoCounter() {
+function TodoCounter({ loading, totalTodos, completedTodos }) {
   let htmlRender;
-
-  const { loading, totalTodos, completedTodos } = React.useContext(TodoContext);
 
   htmlRender = loading ? (
     <>Cargando...</>

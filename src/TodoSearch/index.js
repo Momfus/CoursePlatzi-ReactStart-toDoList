@@ -1,11 +1,7 @@
-import { TodoContext } from "../TodoContext";
 import "./TodoSearch.css";
 import React from "react";
 
-function TodoSearch() {
-  const { loading, searchValue, setSearchValue } =
-    React.useContext(TodoContext);
-
+function TodoSearch({ loading, searchValue, setSearchValue }) {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <input
