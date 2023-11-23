@@ -1,9 +1,6 @@
 import React from "react";
-import { TodoContext } from "../TodoContext";
 
-function EmptyTodos() {
-  const { totalTodos } = React.useContext(TodoContext);
-
+function EmptyTodos({ totalTodos }) {
   return totalTodos === 0 ? (
     <p>Crea tu primer TODO</p>
   ) : (

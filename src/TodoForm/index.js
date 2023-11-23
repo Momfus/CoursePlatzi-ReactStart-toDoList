@@ -1,9 +1,7 @@
 import React from "react";
 import "./TodoForm.css";
-import { TodoContext } from "../TodoContext";
-function TodoForm() {
-  const { addTodo, setOpenModal } = React.useContext(TodoContext);
 
+function TodoForm({ addTodo, setOpenModal }) {
   // Para manejar los valores (no esta en el contexto porque no es necesario todo lo se hace en el formulario en este caso)
   const [newTodoValue, setNewTodoValue] = React.useState("");
 
