@@ -1,11 +1,7 @@
 import React from "react";
 
-function EmptyTodos({ totalTodos }) {
-  return totalTodos === 0 ? (
-    <p>Crea tu primer TODO</p>
-  ) : (
-    <p>No se encontraron resultados</p>
-  );
+function EmptyTodos() {
+  return <p>Crea tu primer ToDo</p>;
 }
 
 export { EmptyTodos };
