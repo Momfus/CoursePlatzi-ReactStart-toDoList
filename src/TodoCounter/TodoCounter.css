@@ -10,3 +10,7 @@
 .mainCounter > h1 > span {
   font-weight: bold;
 }
+
+.mainCounter--loading {
+  opacity: 25%;
+}

@@ -16,7 +16,7 @@ function TodoCounter({ loading, totalTodos, completedTodos }) {
   );
 
   return (
-    <div className="mainCounter">
+    <div className={`mainCounter ${!!loading && ".mainCounter--loading"}`}>
       <h1>{htmlRender}</h1>
     </div>
   );

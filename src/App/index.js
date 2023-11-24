@@ -58,6 +58,7 @@ function App() {
         onEmptySearchResults={(searchText) => (
           <p>No hay resultados para {searchText}</p>
         )}
+        // Lo de abajo es para hacer por render props
         // render={(todo) => (
         //   <TodoItem
         //     key={todo.text}
