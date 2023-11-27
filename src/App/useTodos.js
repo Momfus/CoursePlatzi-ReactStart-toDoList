@@ -1,13 +1,12 @@
 import React from "react";
-import { useLocalStorage } from "./userLocalStorage";
+import { useLocalStorage } from "./useLocalStorage";
 
-// Esto permite compartir props en diferentes capas de los componentes sin tener que ir pasandolo entre varios hijos
-const TodoContext = React.createContext();
-
-function TodoProvider({ children }) {
+// En versión pasado se uso context, ahora se usará un custom hook
+function useTodos(props) {
   const {
     item: todos,
     saveItem: saveTodos,
+    sincronizeItem: sincronizeTodos,
     loading,
     error,
   } = useLocalStorage("TODOS_V1", []); // Lo que destructuramos (variables, estados y funciones) podemos colocar el nombre que queramos
@@ -49,26 +48,21 @@ function TodoProvider({ children }) {
     saveTodos(newTodos);
   };
 
-  return (
-    <TodoContext.Provider
-      value={{
-        loading,
-        error,
-        completedTodos,
-        totalTodos,
-        searchValue,
-        setSearchValue,
-        searchedTodos,
-        completeTodo,
-        deleteTodo,
-        openModal,
-        setOpenModal,
-        addTodo,
-      }}
-    >
-      {children}
-    </TodoContext.Provider>
-  );
+  return {
+    loading,
+    error,
+    completedTodos,
+    totalTodos,
+    searchValue,
+    setSearchValue,
+    searchedTodos,
+    completeTodo,
+    deleteTodo,
+    openModal,
+    setOpenModal,
+    addTodo,
+    sincronizeTodos,
+  };
 }
 
-export { TodoContext, TodoProvider };
+export { useTodos };

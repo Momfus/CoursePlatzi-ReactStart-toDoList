@@ -1,4 +1,4 @@
-input {
+.TodoSearch {
   height: 64px;
   margin: auto;
 
@@ -12,10 +12,14 @@ input {
   box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.25);
 }
 
-input::placeholder {
+.TodoSearch::placeholder {
   color: #a5a5a5;
 }
 
-input:focus {
+.TodoSearch:focus {
   outline-color: #61dafa;
+}
+
+.TodoSearch:disabled {
+  opacity: 25%;
 }

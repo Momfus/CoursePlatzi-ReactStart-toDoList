@@ -1,11 +1,8 @@
 import React from "react";
 import "./TodoCounter.css";
-import { TodoContext } from "../TodoContext";
 
-function TodoCounter() {
+function TodoCounter({ loading, totalTodos, completedTodos }) {
   let htmlRender;
-
-  const { loading, totalTodos, completedTodos } = React.useContext(TodoContext);
 
   htmlRender = loading ? (
     <>Cargando...</>
@@ -19,7 +16,7 @@ function TodoCounter() {
   );
 
   return (
-    <div className="mainCounter">
+    <div className={`mainCounter ${!!loading && "mainCounter--loading"}`}>
       <h1>{htmlRender}</h1>
     </div>
   );

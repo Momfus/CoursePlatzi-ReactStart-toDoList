@@ -1,17 +1,88 @@
-import React from "react"; // Necesario para usar react.fragment (sirve para no generar un nodo adicional en el DOM)
-import { AppUi } from "./AppUi";
-import { TodoProvider } from "../TodoContext";
-
-// Como hay una carpeta con ese nombre que tiene un archivo que exporte en un index.js --> lo toma igual
-//import {RxCheck} from 'react-icons/rx' // si uno quiere para iconos generales, usar npm install react-icons --save
+import React from "react";
+import { useTodos } from "./useTodos";
+import { TodoSearch } from "../TodoSearch";
+import { TodoList } from "../TodoList";
+import { TodoItem } from "../TodoItem";
+import { TodosLoading } from "../TodosLoading";
+import { TodosError } from "../TodosError";
+import { EmptyTodos } from "../EmptyTodos";
+import { CreateTodoButton } from "../CreateTodoButton";
+import { Modal } from "../Modal";
+import { TodoForm } from "../TodoForm";
+import { TodoHeader } from "../TodoHeader";
+import { TodoCounter } from "../TodoCounter";
+import { ChangeAlert } from "../ChangeAlert";
 
 function App() {
-  return (
-    // Ahora todo se comparte por el Context en TodoContext con TodoProvider
+  const {
+    loading,
+    error,
+    searchedTodos,
+    completeTodo,
+    deleteTodo,
+    openModal,
+    totalTodos,
+    completedTodos,
+    searchValue,
+    setSearchValue,
+    addTodo,
+    setOpenModal,
+    sincronizeTodos,
+  } = useTodos();
 
-    <TodoProvider>
-      <AppUi />
-    </TodoProvider>
+  return (
+    <>
+      <TodoHeader loading={loading}>
+        <TodoCounter totalTodos={totalTodos} completedTodos={completedTodos} />
+        <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
+      </TodoHeader>
+
+      <br />
+
+      {/* Se aplica el patrón "render props" que sirve para renderizar según lo que se va necesitando  */}
+      <TodoList
+        error={error}
+        loading={loading}
+        searchedTodos={searchedTodos}
+        totalTodos={totalTodos}
+        searchValue={searchValue}
+        onError={() => <TodosError />} // Esto es un render prop y similares
+        onLoading={() => <TodosLoading />}
+        onEmptyTodos={() => <EmptyTodos />}
+        onEmptySearchResults={(searchText) => (
+          <p>No hay resultados para {searchText}</p>
+        )}
+        // Lo de abajo es para hacer por render props
+        // render={(todo) => (
+        //   <TodoItem
+        //     key={todo.text}
+        //     text={todo.text}
+        //     completed={todo.completed}
+        //     onComplete={() => completeTodo(todo.text)}
+        //     onDelete={() => deleteTodo(todo.text)}
+        //   />
+        // )}
+      >
+        {(todo) => (
+          <TodoItem
+            key={todo.text}
+            text={todo.text}
+            completed={todo.completed}
+            onComplete={() => completeTodo(todo.text)}
+            onDelete={() => deleteTodo(todo.text)}
+          />
+        )}
+      </TodoList>
+
+      <CreateTodoButton setOpenModal={setOpenModal} openModal={openModal} />
+      {openModal && (
+        <Modal>
+          <TodoForm addTodo={addTodo} setOpenModal={setOpenModal}></TodoForm>
+        </Modal>
+      )}
+
+      <ChangeAlert sincronize={sincronizeTodos} />
+    </>
   );
 }
 
