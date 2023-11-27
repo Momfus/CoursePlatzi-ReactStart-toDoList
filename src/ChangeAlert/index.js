@@ -1,9 +1,11 @@
 import React from "react";
-import { withStorageListener } from "./withStorageListener";
+import { useStorageListener } from "./useStorageListener";
 import "./ChangeAlert.css";
 
 // Se utiliza HOC para poder escuchar los cambios en el localStorage (agrega funcionalidad a un componente)
-function ChangeAlert({ show, toggleShow }) {
+function ChangeAlert({ sincronize }) {
+  const { show, toggleShow } = useStorageListener(sincronize);
+
   if (show) {
     return (
       <div className="ChangeAlert-bg">
@@ -23,6 +25,4 @@ function ChangeAlert({ show, toggleShow }) {
   }
 }
 
-const ChangeAlertWithStorageListener = withStorageListener(ChangeAlert);
-
-export { ChangeAlertWithStorageListener };
+export { ChangeAlert };
