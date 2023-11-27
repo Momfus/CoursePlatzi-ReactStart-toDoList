@@ -6,6 +6,7 @@ function useTodos(props) {
   const {
     item: todos,
     saveItem: saveTodos,
+    sincronizeItem: sincronizeTodos,
     loading,
     error,
   } = useLocalStorage("TODOS_V1", []); // Lo que destructuramos (variables, estados y funciones) podemos colocar el nombre que queramos
@@ -60,6 +61,7 @@ function useTodos(props) {
     openModal,
     setOpenModal,
     addTodo,
+    sincronizeTodos,
   };
 }
 
