@@ -14,21 +14,26 @@ import { TodoCounter } from "../TodoCounter";
 import { ChangeAlert } from "../ChangeAlert";
 
 function App() {
+  const { state, stateUpdaters } = useTodos();
+
   const {
     loading,
     error,
-    searchedTodos,
-    completeTodo,
-    deleteTodo,
-    openModal,
-    totalTodos,
     completedTodos,
+    totalTodos,
     searchValue,
+    searchedTodos,
+    openModal,
+  } = state;
+
+  const {
     setSearchValue,
     addTodo,
+    completeTodo,
+    deleteTodo,
     setOpenModal,
     sincronizeTodos,
-  } = useTodos();
+  } = stateUpdaters;
 
   return (
     <>
