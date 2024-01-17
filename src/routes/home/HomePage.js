@@ -68,6 +68,7 @@ function HomePage() {
         //   />
         // )}
       >
+        {/* Por cada TODO que tenemos, renderizamos un TodoItem */}
         {(todo) => (
           <TodoItem
             key={todo.text}
@@ -75,6 +76,7 @@ function HomePage() {
             completed={todo.completed}
             onComplete={() => completeTodo(todo.text)}
             onDelete={() => deleteTodo(todo.text)}
+            onEdit={() => console.log("Editando")}
           />
         )}
       </TodoList>
