@@ -2,7 +2,7 @@ import React from "react";
 import { useLocalStorage } from "./useLocalStorage";
 
 // En versión pasado se uso context, ahora se usará un custom hook
-function useTodos(props) {
+function useTodos() {
   const {
     item: todos,
     saveItem: saveTodos,
