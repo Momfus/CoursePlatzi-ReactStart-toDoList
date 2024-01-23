@@ -9,7 +9,7 @@ function useTodos() {
     sincronizeItem: sincronizeTodos,
     loading,
     error,
-  } = useLocalStorage("TODOS_V1", []); // Lo que destructuramos (variables, estados y funciones) podemos colocar el nombre que queramos
+  } = useLocalStorage("TODOS_V2", []); // Lo que destructuramos (variables, estados y funciones) podemos colocar el nombre que queramos
   const [searchValue, setSearchValue] = React.useState(""); // Nomeclatura: state, setState
 
   const [openModal, setOpenModal] = React.useState(false);
@@ -25,25 +25,27 @@ function useTodos() {
 
   const addTodo = (text) => {
     const newTodos = [...todos];
+    const id = newTodoId(newTodos);
     newTodos.push({
       text,
       completed: false,
+      id,
     });
 
     saveTodos(newTodos);
   };
 
-  const completeTodo = (text) => {
+  const completeTodo = (id) => {
     const newTodos = [...todos];
-    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
+    const todoIndex = newTodos.findIndex((todo) => todo.id === id);
     const previousState = newTodos[todoIndex].completed;
     newTodos[todoIndex].completed = !previousState;
     saveTodos(newTodos);
   };
 
-  const deleteTodo = (text) => {
+  const deleteTodo = (id) => {
     const newTodos = [...todos];
-    const todoIndex = newTodos.findIndex((todo) => todo.text === text);
+    const todoIndex = newTodos.findIndex((todo) => todo.id === id);
     newTodos.splice(todoIndex, 1); // Lo saca del arreglo
     saveTodos(newTodos);
   };
@@ -72,5 +74,11 @@ function useTodos() {
     stateUpdaters,
   };
 }
+
+const newTodoId = (todoList) => {
+  const idList = todoList.map((todo) => todo.id);
+  const idMax = idList.length > 0 ? Math.max(...idList) : -1; // Obtener el id más grande y de ahi va armando los nuevos
+  return idMax + 1;
+};
 
 export { useTodos };
