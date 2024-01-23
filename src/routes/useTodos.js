@@ -12,8 +12,6 @@ function useTodos() {
   } = useLocalStorage("TODOS_V2", []); // Lo que destructuramos (variables, estados y funciones) podemos colocar el nombre que queramos
   const [searchValue, setSearchValue] = React.useState(""); // Nomeclatura: state, setState
 
-  const [openModal, setOpenModal] = React.useState(false);
-
   const completedTodos = todos.filter((todo) => !!todo.completed).length; // todo.completed === true; el simbolo !! lo convierte en booleano en caso que haya string o un valor cualquiera
   const totalTodos = todos.length;
 
@@ -57,7 +55,6 @@ function useTodos() {
     totalTodos,
     searchValue,
     searchedTodos,
-    openModal,
   };
 
   const stateUpdaters = {
@@ -65,7 +62,6 @@ function useTodos() {
     addTodo,
     completeTodo,
     deleteTodo,
-    setOpenModal,
     sincronizeTodos,
   };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useTodos } from "../useTodos";
 import { TodoSearch } from "../../ui/TodoSearch";
 import { TodoList } from "../../ui/TodoList";
@@ -7,13 +8,12 @@ import { TodosLoading } from "../../ui/TodosLoading";
 import { TodosError } from "../../ui/TodosError";
 import { EmptyTodos } from "../../EmptyTodos";
 import { CreateTodoButton } from "../../CreateTodoButton";
-import { Modal } from "../../Modal";
-import { TodoForm } from "../../ui/TodoForm";
 import { TodoHeader } from "../../ui/TodoHeader";
 import { TodoCounter } from "../../ui/TodoCounter";
 import { ChangeAlert } from "../../ChangeAlert";
 
 function HomePage() {
+  const navigate = useNavigate();
   const { state, stateUpdaters } = useTodos();
 
   const {
@@ -23,17 +23,10 @@ function HomePage() {
     totalTodos,
     searchValue,
     searchedTodos,
-    openModal,
   } = state;
 
-  const {
-    setSearchValue,
-    addTodo,
-    completeTodo,
-    deleteTodo,
-    setOpenModal,
-    sincronizeTodos,
-  } = stateUpdaters;
+  const { setSearchValue, completeTodo, deleteTodo, sincronizeTodos } =
+    stateUpdaters;
 
   return (
     <>
@@ -57,16 +50,6 @@ function HomePage() {
         onEmptySearchResults={(searchText) => (
           <p>No hay resultados para {searchText}</p>
         )}
-        // Lo de abajo es para hacer por render props
-        // render={(todo) => (
-        //   <TodoItem
-        //     key={todo.text}
-        //     text={todo.text}
-        //     completed={todo.completed}
-        //     onComplete={() => completeTodo(todo.text)}
-        //     onDelete={() => deleteTodo(todo.text)}
-        //   />
-        // )}
       >
         {/* Por cada TODO que tenemos, renderizamos un TodoItem */}
         {(todo) => (
@@ -76,17 +59,12 @@ function HomePage() {
             completed={todo.completed}
             onComplete={() => completeTodo(todo.id)}
             onDelete={() => deleteTodo(todo.id)}
-            onEdit={() => console.log("Editando")}
+            onEdit={() => navigate("/edit/" + todo.id)}
           />
         )}
       </TodoList>
 
-      <CreateTodoButton setOpenModal={setOpenModal} openModal={openModal} />
-      {openModal && (
-        <Modal>
-          <TodoForm addTodo={addTodo} setOpenModal={setOpenModal}></TodoForm>
-        </Modal>
-      )}
+      <CreateTodoButton onClick={() => navigate("/new")} />
 
       <ChangeAlert sincronize={sincronizeTodos} />
     </>

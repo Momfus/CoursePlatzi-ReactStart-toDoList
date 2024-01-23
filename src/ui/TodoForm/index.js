@@ -1,18 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./TodoForm.css";
 
-function TodoForm({ addTodo, setOpenModal }) {
+function TodoForm(props) {
+  const navigate = useNavigate();
   // Para manejar los valores (no esta en el contexto porque no es necesario todo lo se hace en el formulario en este caso)
   const [newTodoValue, setNewTodoValue] = React.useState("");
 
   const onSubmit = (event) => {
     event.preventDefault();
-    addTodo(newTodoValue);
-    setOpenModal(false);
+    props.submitEvent(newTodoValue);
+    navigate("/");
   };
 
   const onCancel = () => {
-    setOpenModal(false);
+    navigate("/");
   };
 
   const onChange = (event) => {
@@ -21,7 +23,7 @@ function TodoForm({ addTodo, setOpenModal }) {
 
   return (
     <form onSubmit={onSubmit}>
-      <label>Escribe tu nuevo TODO</label>
+      <label>{props.label}</label>
       <textarea
         placeholder="Escribe el nombre de tu TODO..."
         value={newTodoValue}
@@ -37,7 +39,7 @@ function TodoForm({ addTodo, setOpenModal }) {
           Cancelar
         </button>
         <button type="submit" className="TodoForm-button TodoForm-button--add">
-          Añadir
+          {props.submitText}
         </button>
       </div>
     </form>
