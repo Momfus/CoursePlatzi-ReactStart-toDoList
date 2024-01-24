@@ -41,6 +41,13 @@ function useTodos() {
     saveTodos(newTodos);
   };
 
+  const editTodo = (id, newText) => {
+    const newTodos = [...todos];
+    const todoIndex = newTodos.findIndex((todo) => todo.id === id);
+    newTodos[todoIndex].text = newText;
+    saveTodos(newTodos);
+  };
+
   const deleteTodo = (id) => {
     const newTodos = [...todos];
     const todoIndex = newTodos.findIndex((todo) => todo.id === id);
@@ -61,6 +68,7 @@ function useTodos() {
     setSearchValue,
     addTodo,
     completeTodo,
+    editTodo,
     deleteTodo,
     sincronizeTodos,
   };
