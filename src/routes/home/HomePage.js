@@ -59,7 +59,9 @@ function HomePage() {
             completed={todo.completed}
             onComplete={() => completeTodo(todo.id)}
             onDelete={() => deleteTodo(todo.id)}
-            onEdit={() => navigate("/edit/" + todo.id)}
+            onEdit={() => navigate("/edit/" + todo.id, {
+              state: { todo } // Se pasa la informacion del mismo todo directamente para evitar mas tiempos de carga
+            })}
           />
         )}
       </TodoList>

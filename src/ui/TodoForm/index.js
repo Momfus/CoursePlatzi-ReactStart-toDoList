@@ -5,7 +5,7 @@ import "./TodoForm.css";
 function TodoForm(props) {
   const navigate = useNavigate();
   // Para manejar los valores (no esta en el contexto porque no es necesario todo lo se hace en el formulario en este caso)
-  const [newTodoValue, setNewTodoValue] = React.useState("");
+  const [newTodoValue, setNewTodoValue] = React.useState(props.defaultTodoText || "");
 
   const onSubmit = (event) => {
     event.preventDefault();
