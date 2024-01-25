@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/CoursePlatzi-ReactStart/static/css/main.02025eb1.css",
-    "main.js": "/CoursePlatzi-ReactStart/static/js/main.7790d229.js",
-    "index.html": "/CoursePlatzi-ReactStart/index.html",
-    "static/media/icon-delete.svg": "/CoursePlatzi-ReactStart/static/media/icon-delete.5b80b13b07b967a480d23b7b96dbefa2.svg",
-    "static/media/icon-check.svg": "/CoursePlatzi-ReactStart/static/media/icon-check.c2806e60a3201495929a88b1667e865f.svg",
-    "main.02025eb1.css.map": "/CoursePlatzi-ReactStart/static/css/main.02025eb1.css.map",
-    "main.7790d229.js.map": "/CoursePlatzi-ReactStart/static/js/main.7790d229.js.map"
+    "main.css": "/CoursePlatzi-ReactStart-toDoList/static/css/main.5263d5be.css",
+    "main.js": "/CoursePlatzi-ReactStart-toDoList/static/js/main.c232c766.js",
+    "index.html": "/CoursePlatzi-ReactStart-toDoList/index.html",
+    "static/media/icon-delete.svg": "/CoursePlatzi-ReactStart-toDoList/static/media/icon-delete.5b80b13b07b967a480d23b7b96dbefa2.svg",
+    "static/media/icon-check.svg": "/CoursePlatzi-ReactStart-toDoList/static/media/icon-check.c2806e60a3201495929a88b1667e865f.svg",
+    "static/media/icon-edit.svg": "/CoursePlatzi-ReactStart-toDoList/static/media/icon-edit.f04f58faa1972fc4801e340613e58879.svg",
+    "main.5263d5be.css.map": "/CoursePlatzi-ReactStart-toDoList/static/css/main.5263d5be.css.map",
+    "main.c232c766.js.map": "/CoursePlatzi-ReactStart-toDoList/static/js/main.c232c766.js.map"
   },
   "entrypoints": [
-    "static/css/main.02025eb1.css",
-    "static/js/main.7790d229.js"
+    "static/css/main.5263d5be.css",
+    "static/js/main.c232c766.js"
   ]
 }
