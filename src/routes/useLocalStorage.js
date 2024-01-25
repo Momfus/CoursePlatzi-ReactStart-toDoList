@@ -28,8 +28,8 @@ function useLocalStorage(itemName, initialValue) {
           parsedItems = initialValue;
         } else {
           parsedItems = JSON.parse(localStorageItem);
-          onSuccess(parsedItems);
         }
+        onSuccess(parsedItems);
       } catch (error) {
         onError(error);
       }
